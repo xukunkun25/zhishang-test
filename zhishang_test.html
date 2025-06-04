@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>智商识别系统</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background-color: #fff;
+      font-family: "Arial", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 24px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .loading {
+      font-size: 18px;
+      margin-top: 30px;
+      display: none;
+      color: #888;
+    }
+
+    .dots {
+      display: inline-block;
+      margin-left: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>点击开始智商评估</h1>
+  <button id="startBtn">开始获取</button>
+  <div class="loading" id="loading">正在分析<span class="dots" id="dots">.</span></div>
+
+  <script>
+    const btn = document.getElementById("startBtn");
+    const loading = document.getElementById("loading");
+    const dots = document.getElementById("dots");
+
+    let dotCount = 1;
+    let dotInterval;
+    let timeoutHandle;
+
+    function startProcess() {
+      btn.style.display = "none";
+      loading.style.display = "block";
+
+      // 开始点点动画
+      dotInterval = setInterval(() => {
+        dotCount = (dotCount % 6) + 1;
+        dots.textContent = ".".repeat(dotCount);
+      }, 400);
+
+      // 模拟加载 10 秒
+      timeoutHandle = setTimeout(() => {
+        clearInterval(dotInterval);
+        loading.style.display = "none";
+        dots.textContent = ".";
+
+        alert("蠢蛋");
+
+        setTimeout(() => {
+          alert("确实符合你的人设");
+          // 恢复按钮，重新开始
+          btn.style.display = "inline-block";
+        }, 600);
+      }, 10000);
+    }
+
+    btn.addEventListener("click", startProcess);
+  </script>
+</body>
+</html>
